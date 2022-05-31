@@ -1,3 +1,12 @@
 {{ define "main" }}
+  <div class="col-xs-12 col-sm-8 col-md-9 content-column">
+    {{ partial "mobile_nav_toggle.html" . }}
+
+    {{ if isset .Params "title" }}
+      <h1>{{.Title}}</h1>
+      {{.Content}}
+    {{ end }}
+  </div>
+
   {{ partial "portfolio.html" . }}
 {{ end }}
