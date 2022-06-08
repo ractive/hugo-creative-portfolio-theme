@@ -10,7 +10,15 @@
             {{ else }}
               <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay with-hover-icon">
             {{ end }}
-            <img src="{{.Params.image | absURL}}" alt="" class="img-responsive">
+
+            {{ $image := "" }}
+            {{ if or (hasPrefix (.Params.image) "http://") (hasPrefix (.Params.image) "https://") }}
+              {{ $image = resources.GetRemote (.Params.image) }}
+            {{ else }}
+              {{ $image = resources.Get (.Params.image) }} 
+            {{ end}}
+            <img src="{{ ($image.Fit "320x500 q75 Center").RelPermalink }}" class="img-responsive"/>
+
             </a>
             {{ end }}
             {{ if eq .Params.showonlyimage true }}
