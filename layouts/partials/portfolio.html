@@ -6,9 +6,9 @@
         <div class="box-masonry">
           {{ if and (isset .Params "image") .Params.image }}
             {{ if eq .Params.showonlyimage true }}
-              <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay">
+              <a href="{{ .Permalink }}" title="{{ .Title }}" class="box-masonry-image with-hover-overlay">
             {{ else }}
-              <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay with-hover-icon">
+              <a href="{{ .Permalink }}" title="{{ .Title }}" class="box-masonry-image with-hover-overlay with-hover-icon">
             {{ end }}
 
             {{ $image := "" }}
@@ -17,7 +17,8 @@
             {{ else }}
               {{ $image = resources.Get (.Params.image) }} 
             {{ end}}
-            <img src="{{ ($image.Fit "320x500 q70 webp").RelPermalink }}" class="img-responsive"/>
+            {{ $fit := ($image.Fit "320x500 q70 webp")}}
+            <img width="{{$fit.Width}}" height="{{$fit.Height}}" src="{{ ($image.Fit "320x500 q70 webp").RelPermalink }}" class="img-responsive" alt="{{ .Title }}"/>
 
             </a>
             {{ end }}
