@@ -17,7 +17,7 @@
             {{ else }}
               {{ $image = resources.Get (.Params.image) }} 
             {{ end}}
-            <img src="{{ ($image.Fit "320x500 q75 Center").RelPermalink }}" class="img-responsive"/>
+            <img src="{{ ($image.Fit "320x500 q70 webp").RelPermalink }}" class="img-responsive"/>
 
             </a>
             {{ end }}
